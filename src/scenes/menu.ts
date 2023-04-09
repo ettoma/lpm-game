@@ -1,4 +1,5 @@
-import { Actor, Canvas, Engine, Scene, ScreenElement, Color, Label, Font } from "excalibur";
+import { Actor, Canvas, Engine, Scene, ScreenElement, Color, Label, Font, Vector } from "excalibur";
+import Game from "../engine/engine";
 
 
 const menu = new Scene
@@ -6,24 +7,27 @@ const menu = new Scene
 class StartButton extends ScreenElement {
     constructor() {
         super({
-            x: 250,
-            y: 250,
-            width: 50,
-            height: 50,
+            y: Game.drawHeight / 2 - 25,
+            x: Game.drawWidth / 2 - 100,
+            width: 100,
+            height: 25,
             color: Color.Green,
 
         });
     }
 
     onInitialize(_engine: Engine): void {
-        this.on("pointerenter", () => {
-            alert("yoyoyo")
+        this.on("pointerup", () => {
+            Game.goToScene("level1")
         })
 
         this.addChild(new Label({
             font: new Font({
                 size: 20
-            }), text: "Start"
+            }),
+            text: "Start",
+            x: 20,
+            y: 20
         }))
     }
 }
