@@ -1,8 +1,16 @@
-import {  ImageSource } from "excalibur";
-import sword from "./images/sword.png"; // for parcelv2 this is configured in the .parcelrc
+import { ImageSource, Loader } from "excalibur";
+import sword from "./images/sword.png"
 
-let Resources = {
+const Images = {
   Sword: new ImageSource(sword)
 };
 
-export { Resources };
+const loader = new Loader();
+const allResources = { ...Images };
+for (const res in allResources) {
+  console.log("loading resource: " + res);
+  loader.addResource(allResources[res]);
+  console.log("loaded resource: " + res);
+}
+
+export { Images, loader };

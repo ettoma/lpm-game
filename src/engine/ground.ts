@@ -7,7 +7,8 @@ const ground = new Actor({
     width: Game.drawWidth,
     height: 100,
     color: Color.DarkGray,
-    collisionType: CollisionType.Fixed
+    collisionType: CollisionType.Fixed,
+    name: "ground"
 });
 
 export default ground
