@@ -1,8 +1,10 @@
 import { Actor, CollisionType, Color, Engine, PreCollisionEvent, vec, Animation, Graphic } from "excalibur";
-import Game from "../engine/engine";
 import { Images } from "../resources";
+import Score from "../components/score";
 
 
+
+const score = new Score(0)
 
 class Ball extends Actor {
     constructor(x, y) {
@@ -29,6 +31,8 @@ class Ball extends Actor {
     private onPreCollision(evt: PreCollisionEvent) {
         console.log("colliding with " + evt.other.name)
 
+        //! remove the score logic from the actor
+        score.increaseScore(20)
         this.kill() // removes the actor from the scene
     }
 }
