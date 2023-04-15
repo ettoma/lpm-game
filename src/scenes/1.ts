@@ -1,31 +1,39 @@
 import { Scene, Timer } from "excalibur";
 import player from "../actors/player";
-import ground from "../engine/ground";
-import Game from "../engine/engine";
-import Ball from "../actors/ball";
+import side_menu from "./sidemenu";
+import {generate_enemy} from "../actors/enemy"
 
 
-const level1 = new Scene
+const level1 = new Scene;
 
-
-let ballTimer = new Timer({
+let enemy_spawn_timer = new Timer({
     fcn: () => {
-        let newBall = new Ball(Game.drawHeight / 2, Game.drawWidth / 2,)
+        let newBall = generate_enemy("");
         level1.add(newBall)
     },
     interval: 1000,
     repeats: true,
-    numberOfRepeats: 20
+    // numberOfRepeats: 20
 
 });
 
-level1.addTimer(ballTimer)
-ballTimer.start()
+let power_up_spawn_timer = new Timer({
+    fcn: () => {
+        // TODO: Spawn power ups
+    },
+    interval: 10000,
+    repeats: true,
+    // numberOfRepeats: 20
 
+});
 
-level1.add(ground)
-level1.add(player)
+level1.addTimer(enemy_spawn_timer);
+level1.addTimer(power_up_spawn_timer);
+enemy_spawn_timer.start();
+power_up_spawn_timer.start();
 
+level1.add(player);
+level1.add(side_menu);
 
 
 export default level1;
