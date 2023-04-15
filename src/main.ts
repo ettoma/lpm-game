@@ -7,6 +7,7 @@ import { loader } from "./resources"
 
 Game.addScene("level1", level1)
 Game.addScene("menu", menu)
+
 Game.start(loader)
 
 console.log(loader.isLoaded())
