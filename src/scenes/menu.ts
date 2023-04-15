@@ -18,7 +18,6 @@ class StartButton extends ScreenElement {
 
     onInitialize(_engine: Engine): void {
         this.on("pointerup", () => {
-            Game.goToScene("character_selection")
         })
 
         this.addChild(new Label({

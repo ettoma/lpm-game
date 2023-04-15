@@ -1,7 +1,7 @@
 import { Scene, Timer } from "excalibur";
 import player from "../actors/player";
 import side_menu from "./sidemenu";
-import {generate_enemy} from "../actors/enemy"
+import { generate_enemy } from "../actors/enemy"
 
 
 const level1 = new Scene;
@@ -13,7 +13,6 @@ let enemy_spawn_timer = new Timer({
     },
     interval: 1000,
     repeats: true,
-    // numberOfRepeats: 20
 
 });
 
@@ -23,7 +22,6 @@ let power_up_spawn_timer = new Timer({
     },
     interval: 10000,
     repeats: true,
-    // numberOfRepeats: 20
 
 });
 
