@@ -32,7 +32,7 @@ class StartButton extends ScreenElement {
     }
 }
 
-
 menu.add(new StartButton())
+
 
 export default menu
