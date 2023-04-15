@@ -1,12 +1,11 @@
 import { Actor, CollisionType, Color, PreCollisionEvent, vec, Vector, randomIntInRange } from "excalibur";
 import Game from "../engine/engine";
-import { Images } from "../resources";
-import {random_number_from_range} from "../utils/utils"
+import { random_number_from_range } from "../utils/utils"
 
 
 class Enemy extends Actor {
-    gravity : Vector = vec(0, 3);
-    constructor(pos: Vector, velocity : Vector, acceleration : Vector) {
+    gravity: Vector = vec(0, 3);
+    constructor(pos: Vector, velocity: Vector, acceleration: Vector) {
         super({
             name: "enemy",
             x: pos.x,
@@ -22,13 +21,9 @@ class Enemy extends Actor {
         this.on('precollision', (evt) => this.onPreCollision(evt));
     };
 
-        // onInitialize(_engine: Engine): void {
-        //     this.graphics.use(Images.Sword.toSprite())
-        // }
-
     private onPreCollision(evt: PreCollisionEvent) {
         if (evt.other.name == "player") {
-            this.kill() 
+            this.kill()
         }
     }
 
@@ -57,28 +52,28 @@ For now, enemies can spawn from the top or top-halves of the frame edges
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 */
-export function generate_enemy(enemy_type : any) : Actor {
+export function generate_enemy(enemy_type: any): Actor {
     //enemy type is a placeholder for an object
     let enemy_pos = (generate_enemy_location());
-    let vel : Vector = vec(0,0);
-    let acc : Vector = vec(0,0);
+    let vel: Vector = vec(0, 0);
+    let acc: Vector = vec(0, 0);
     if (enemy_pos.x == 0) {
         vel = vec(200, 100);
-        acc = vec(0,0);
+        acc = vec(0, 0);
     }
     else if (enemy_pos.y == 0) {
         vel: vec(0, 100);
-        acc: vec(0,0);
+        acc: vec(0, 0);
     }
     else {
         vel = vec(-200, -100);
-        acc = vec(0,0);
+        acc = vec(0, 0);
     }
 
     return new Enemy(enemy_pos, vel, acc);
 }
 
-function generate_enemy_location() : Vector {
+function generate_enemy_location(): Vector {
     // (width * 0.1) is to increase the chance of generating a location on the edge
     let x = randomIntInRange(width * -0.1, width + width + (width * 0.1));
     let half_height = height / 2;
