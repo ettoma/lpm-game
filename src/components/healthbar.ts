@@ -1,4 +1,4 @@
-import { Color, Engine, Font, Label, ScreenElement } from "excalibur";
+import { Canvas, Color, Engine, Font, Label, ScreenElement } from "excalibur";
 import player from "../actors/player";
 
 class Healthbar extends ScreenElement {
@@ -9,8 +9,8 @@ class Healthbar extends ScreenElement {
             x: x - 100,
             y: y - 100,
             width: sideMenuWidth * 0.85,
-            height: 100,
-            color: Color.White,
+            height: 50,
+            // color: Color.White,
         });
         this.score = score;
 
@@ -28,18 +28,20 @@ class Healthbar extends ScreenElement {
             y: this.height / 2,
         }))
 
+
     }
 
     update(_engine: Engine): void {
         const current_children = this.children;
         for (let i: number = 0; i < current_children.length; i++) {
             if (current_children[i].name == "health_bar") {
-                (current_children[i] as Label).text = "♥️ : " + player.health.toString();
+                (current_children[i] as Label).text = "♥️ x " + player.health.toString();
             }
         }
     }
 
 
 }
+
 
 export default Healthbar

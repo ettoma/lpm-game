@@ -11,10 +11,4 @@ Game.start(loader)
 
 Game.goToScene("level1")
 
-Game.input.pointers.on("move", (event) => {
-    // Best to update the player within its class to avoid dependencies/complexity
-    // player.pos.x = event.worldPos.x
-    // player.pos.y = event.worldPos.y
-
-})
 

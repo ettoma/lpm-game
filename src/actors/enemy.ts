@@ -16,7 +16,7 @@ class Enemy extends Actor {
             collisionType: CollisionType.Active,
             vel: velocity,
             acc: acceleration,
-            rotation: Math.PI / 3
+            rotation: Math.random() * 180
         });
         this.on('precollision', (evt) => this.onPreCollision(evt));
     };
@@ -62,8 +62,8 @@ export function generate_enemy(enemy_type: any): Actor {
         acc = vec(0, 0);
     }
     else if (enemy_pos.y == 0) {
-        vel: vec(0, 100);
-        acc: vec(0, 0);
+        vel = vec(0, 100);
+        acc = vec(0, 0);
     }
     else {
         vel = vec(-200, -100);
