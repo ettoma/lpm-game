@@ -6,8 +6,8 @@ class Healthbar extends ScreenElement {
 
     constructor(x: number, y: number, score: number, sideMenuWidth: number) {
         super({
-            x: x - 100,
-            y: y - 100,
+            x: x,
+            y: y,
             width: sideMenuWidth * 0.85,
             height: 50,
             // color: Color.White,
