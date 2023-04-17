@@ -1,7 +1,8 @@
-import { Actor, Canvas, Color, Font, Label, Vector, vec } from "excalibur";
+import { Actor, Canvas, Color, Font, Label, Vector, vec, Entity, FontStyle } from "excalibur";
 import player from "../actors/player";
 import Game from "../engine/engine";
 import Healthbar from "../components/healthbar";
+import { getTextWidth } from "../utils/utils";
 
 
 export const side_menu_width_ratio = 0.2;
@@ -17,27 +18,17 @@ class SideMenu extends Actor {
             y: pos.y,
             width: width,
             height: height,
-            // color: Color.DarkGray,
+            color: Color.DarkGray,
 
         });
         this.graphics.use(canvas)
-
         this.playerName = playerName;
-
-        this.addChild(new Healthbar(0, 0, player.health, this.width));
-
-        this.addChild(new Label({
-            font: new Font({
-                size: 20,
-                bold: true,
-            }),
-            text: this.playerName,
-            // TODO need to find a way to have responsive positioning, not hardcoded coordinates
-            x: -75,
-            y: -300,
-        }));
+        
         // this.on('precollision', (evt) => this.onPreCollision(evt));
 
+    }
+    mountElement(element : Entity) : Entity {
+        return this.addChild(element);
     }
 }
 
@@ -50,7 +41,7 @@ const canvas = new Canvas({
     draw: (ctx) => {
         ctx.fillStyle = 'white';
         ctx.roundRect(0, Game.drawHeight * 0.075, 200, Game.drawHeight * 0.85, 25);
-
+        
         ctx.fill();
     }
 })
@@ -64,6 +55,31 @@ const side_menu = new SideMenu(
     Game.drawWidth * side_menu_width_ratio,
     Game.drawHeight,
     "DragonpayLover");
+
+
+
+initializeSideMenu(side_menu);
+
+
+
+function initializeSideMenu(sideMenu : SideMenu) : void {
+    let fontSize = 20;
+    let font = new Font({ size: fontSize, bold: true, family: "verdana", style: FontStyle.Normal });
+    let playerNameLabel : Label = new Label({
+        font: font,
+        text: sideMenu.playerName,
+        // TODO need to find a way to have responsive positioning, not hardcoded coordinates
+        x: getTextWidth(sideMenu.playerName, font.style, font.size.toString(), font.family) / -2,
+        y: -300,
+        
+    });
+
+
+
+    sideMenu.mountElement(playerNameLabel);
+    sideMenu.mountElement(new Healthbar(sideMenu.width * -0.6, sideMenu.height * -0.3, player.health, sideMenu.width));
+
+}
 
 
 
