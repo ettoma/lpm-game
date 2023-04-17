@@ -1,5 +1,6 @@
 import { Actor, CollisionType, Color, PreCollisionEvent, vec, Vector, randomIntInRange } from "excalibur";
 import Game from "../engine/engine";
+import { side_menu_width_ratio } from "../scenes/sidemenu";
 import { random_number_from_range } from "../utils/utils"
 
 
@@ -34,7 +35,7 @@ class Enemy extends Actor {
 }
 
 const height = Game.drawHeight
-const width = Game.drawWidth * 0.75
+const width = Game.drawWidth * (1 - side_menu_width_ratio); 
 
 /*
 For now, enemies can spawn from the top or top-halves of the frame edges
@@ -58,7 +59,7 @@ export function generate_enemy(enemy_type: any): Actor {
     let vel: Vector = vec(0, 0);
     let acc: Vector = vec(0, 0);
     if (enemy_pos.x == 0) {
-        vel = vec(200, 100);
+        vel = vec(100, -200);
         acc = vec(0, 0);
     }
     else if (enemy_pos.y == 0) {
@@ -66,7 +67,7 @@ export function generate_enemy(enemy_type: any): Actor {
         acc = vec(0, 0);
     }
     else {
-        vel = vec(-200, -100);
+        vel = vec(-100, -200);
         acc = vec(0, 0);
     }
 
@@ -74,8 +75,8 @@ export function generate_enemy(enemy_type: any): Actor {
 }
 
 function generate_enemy_location(): Vector {
-    // (width * 0.1) is to increase the chance of generating a location on the edge
-    let x = randomIntInRange(width * -0.1, width + width + (width * 0.1));
+    // (width * 0.3) is to increase the chance of generating a location on the edge
+    let x = randomIntInRange(width * -0.3, width + (width * 0.3));
     let half_height = height / 2;
     let y = random_number_from_range(0, half_height);
 
