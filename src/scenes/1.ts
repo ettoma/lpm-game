@@ -3,6 +3,8 @@ import player from "../actors/player";
 import side_menu from "./sidemenu";
 import { generate_enemy } from "../actors/enemy"
 import Healthbar from "../components/healthbar";
+import Box from "../components/box";
+import bgColours from "../assets/colours";
 
 
 const level1 = new Scene;
@@ -40,6 +42,10 @@ power_up_spawn_timer.start();
 
 level1.add(player);
 level1.add(side_menu);
+
+//!Added a sample of Box use, just need to pass width, height and colour, with optional x and y. Default is 0, 0
+// level1.add(new Box(100, 100, "white", 200, 200)) This one is without named parameter
+level1.add(new Box({ width: 100, height: 100, bgColour: "red", x: 200, y: 200 }))
 
 
 export default level1;
