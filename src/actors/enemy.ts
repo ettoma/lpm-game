@@ -1,11 +1,13 @@
-import { Actor, CollisionType, Color, PreCollisionEvent, vec, Vector, randomIntInRange } from "excalibur";
+import { Actor, CollisionType, Color, PreCollisionEvent, vec, Vector, randomIntInRange, ImageSource, Engine } from "excalibur";
 import Game from "../engine/engine";
 import { side_menu_width_ratio } from "../scenes/sidemenu";
 import { random_number_from_range } from "../utils/utils"
+import logos from "../assets/logos";
 
 
 class Enemy extends Actor {
     gravity: Vector = vec(0, 3);
+
     constructor(pos: Vector, velocity: Vector, acceleration: Vector) {
         super({
             name: "enemy",
@@ -20,12 +22,20 @@ class Enemy extends Actor {
             rotation: Math.random() * 180
         });
         this.on('precollision', (evt) => this.onPreCollision(evt));
+
+
     };
+
 
     private onPreCollision(evt: PreCollisionEvent) {
         if (evt.other.name == "player") {
             this.kill()
         }
+    }
+
+    onInitialize() {
+        // this.graphics.use(logos.googlepay.toSprite())
+
     }
 
     update() {
@@ -35,7 +45,7 @@ class Enemy extends Actor {
 }
 
 const height = Game.drawHeight
-const width = Game.drawWidth * (1 - side_menu_width_ratio); 
+const width = Game.drawWidth * (1 - side_menu_width_ratio);
 
 /*
 For now, enemies can spawn from the top or top-halves of the frame edges
